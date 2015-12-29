@@ -48,11 +48,15 @@ function sunset_custom_settings(){
 	add_settings_field('sidebar-gplus', 'Google+ Handler', 'sunset_sidebar_gplus', 'alecaddd_sunset', 'sunset-theme-sidebar-options');
 
 	// Theme Support Options
-	register_setting('sunset-theme-support', 'post_formats', 'sunset_sanitize_post_formats_callback');
+	register_setting('sunset-theme-support', 'post_formats');
+	register_setting('sunset-theme-support', 'custom_header');
+	register_setting('sunset-theme-support', 'custom_background');
 
 	add_settings_section('sunset-theme-support-options', 'Theme Options', 'sunset_theme_support_options', 'alecaddd_sunset_theme');
 
 	add_settings_field('support-post-formats', 'Post Formats', 'sunset_support_post_formats', 'alecaddd_sunset_theme', 'sunset-theme-support-options');
+	add_settings_field('support-header', 'Custom Header', 'sunset_support_header', 'alecaddd_sunset_theme', 'sunset-theme-support-options');
+	add_settings_field('support-background', 'Custom Background', 'sunset_support_background', 'alecaddd_sunset_theme', 'sunset-theme-support-options');
 }
 
 // *** SIDEBAR PAGE FUNCTIONS ***
@@ -63,11 +67,15 @@ function sunset_theme_sidebar_options(){
 
 // Sidebar Image Print Function
 function sunset_sidebar_profile(){
-	$nvalue = 'Upload Profile Picture';
 	$picture = esc_attr( get_option('profile_picture') );
-//	$picture = 'Upload Profile Picture';
-	echo '<input type="button" class="button button-secondary" value="'.$nvalue.'" id="upload-button" />';
-	echo '<input type="hidden" id="profile-picture" value="'.$picture.'" name="profile_picture" />';
+	if(empty($picture)){
+		echo '<input type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button" />';
+		echo '<input type="hidden" id="profile-picture" value="" name="profile_picture" />';
+	} else {
+		echo '<input type="button" class="button button-secondary" value="Replace Profile Picture" id="upload-button" />';
+		echo '<input type="hidden" id="profile-picture" value="'.$picture.'" name="profile_picture" />
+		<input type="button" class="button button-secondary" value="Remove" id="remove-picture" />';
+	}
 }
 
 // Sidebar Name Print Function
@@ -133,21 +141,28 @@ function sunset_support_post_formats(){
 	echo $output;
 }
 
-// Support Post Formats Sanitize Function
-function sunset_sanitize_post_formats_callback( $input ){
-	return $input;
+// Support Header Print Function
+function sunset_support_header(){
+	$options = get_option('custom_header');
+	$checked = (@$options == 1 ? 'checked' : '');
+	echo '<label><input type="checkbox" id="custom_header" name="custom_header" value="1" '.$checked.' /> Activate the Custom Header</label>';
+}
+
+// Support Background Print Function
+function sunset_support_background(){
+	$options = get_option('custom_background');
+	$checked = (@$options == 1 ? 'checked' : '');
+	echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" '.$checked.' /> Activate the Custom Background</label>';
 }
 
 // Support Template Page
-function sunset_theme_support_page()
-{
+function sunset_theme_support_page(){
 	/** @noinspection PhpIncludeInspection */
 	require_once( get_template_directory() . '/inc/templates/sunset-theme-support.php' );
 }
 
 // *** CUSTOM CSS PAGE FUNCTIONS ***
 // Custom CSS Template Page
-function sunset_theme_settings_page()
-{
+function sunset_theme_settings_page(){
 	echo '<h1>Sunset Custom CSS</h1>';
 }

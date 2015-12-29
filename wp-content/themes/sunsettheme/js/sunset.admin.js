@@ -23,4 +23,13 @@ jQuery(document).ready(function($){
         });
         mediaUploader.open();
     });
+    $('#remove-picture').on('click', function(e){
+        e.preventDefault();
+        var answer = confirm("Confirm Remove Picture?");
+        if(answer == true){
+            $('#profile-picture').val('');
+            $('#profile-picture-preview').css('background-image','url("")');
+ //           $('.sunset-general-form').submit();
+        }
+    });
 });
