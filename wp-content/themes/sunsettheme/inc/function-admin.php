@@ -34,7 +34,7 @@ function sunset_custom_settings(){
 	register_setting('sunset-theme-sidebar', 'first_name');
 	register_setting('sunset-theme-sidebar', 'last_name');
 	register_setting('sunset-theme-sidebar', 'user_description');
-	register_setting('sunset-theme-sidebar', 'twitter_handler', 'sunset_sanitize_twitter_handler');
+	register_setting('sunset-theme-sidebar', 'twitter_handler', 'sunset_sanitize_twitter_callback');
 	register_setting('sunset-theme-sidebar', 'facebook_handler');
 	register_setting('sunset-theme-sidebar', 'gplus_handler');
 
@@ -48,13 +48,14 @@ function sunset_custom_settings(){
 	add_settings_field('sidebar-gplus', 'Google+ Handler', 'sunset_sidebar_gplus', 'alecaddd_sunset', 'sunset-theme-sidebar-options');
 
 	// Theme Support Options
-//	register_setting('sunset-theme-support', '');
+	register_setting('sunset-theme-support', 'post_formats', 'sunset_sanitize_post_formats_callback');
 
-//	add_settings_section('sunset-theme-support-options', 'Sidebar Options', 'sunset_theme_support_options', 'alecaddd_sunset');
+	add_settings_section('sunset-theme-support-options', 'Theme Options', 'sunset_theme_support_options', 'alecaddd_sunset_theme');
 
-//	add_settings_field('', '', '', 'alecaddd_sunset', 'sunset-theme-support-options');
+	add_settings_field('support-post-formats', 'Post Formats', 'sunset_support_post_formats', 'alecaddd_sunset_theme', 'sunset-theme-support-options');
 }
 
+// *** SIDEBAR PAGE FUNCTIONS ***
 // Sidebar Title Print Function
 function sunset_theme_sidebar_options(){
 	echo 'Customize Your Sidebar Information';
@@ -88,6 +89,13 @@ function sunset_sidebar_twitter(){
 	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter Handler" /><p class="description">Input your Twitter username without the @ symbol.</p>';
 }
 
+// Sidebar Twitter Sanitize Function
+function sunset_sanitize_twitter_callback($input){
+	$output = sanitize_text_field($input);
+	$output = str_replace('@', '', $output);
+	return $output;
+}
+
 // Sidebar Facebook Print Function
 function sunset_sidebar_facebook(){
 	$facebook = esc_attr( get_option('facebook_handler') );
@@ -100,27 +108,45 @@ function sunset_sidebar_gplus(){
 	echo '<input type="text" name="gplus_handler" value="'.$gplus.'" placeholder="Google+ Handler" />';
 }
 
-// Sanitize Settings Function
-function sunset_sanitize_twitter_handler($input){
-	$output = sanitize_text_field($input);
-	$output = str_replace('@', '', $output);
-	return $output;
-}
-
-// Template Sidebar Functions
+// Sidebar Template Page
 function sunset_theme_sidebar_page()
 {
 	/** @noinspection PhpIncludeInspection */
 	require_once( get_template_directory() . '/inc/templates/sunset-theme-sidebar.php' );
 }
 
-// Template Support Functions
+// *** SUPPORT PAGE FUNCTIONS ***
+// Support Title Print Function
+function sunset_theme_support_options(){
+	echo '<div>Activate Theme Support Options</div>';
+}
+
+// Support Post Formats Print Function
+function sunset_support_post_formats(){
+	$options = get_option('post_formats');
+	$formats = array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat');
+	$output = '';
+	foreach($formats as $format){
+		$checked = (@$options[$format] == 1 ? 'checked' : '');
+		$output .= '<label><input type="checkbox" id="'.$format.'" name="post_formats['.$format.']" value="1" '.$checked.' /> '.$format.'</label><br>';
+	}
+	echo $output;
+}
+
+// Support Post Formats Sanitize Function
+function sunset_sanitize_post_formats_callback( $input ){
+	return $input;
+}
+
+// Support Template Page
 function sunset_theme_support_page()
 {
 	/** @noinspection PhpIncludeInspection */
 	require_once( get_template_directory() . '/inc/templates/sunset-theme-support.php' );
 }
 
+// *** CUSTOM CSS PAGE FUNCTIONS ***
+// Custom CSS Template Page
 function sunset_theme_settings_page()
 {
 	echo '<h1>Sunset Custom CSS</h1>';
