@@ -84,12 +84,12 @@ function sunset_theme_sidebar_section_callback(){
 function sunset_sidebar_profile(){
 	$picture = esc_attr( get_option('profile_picture') );
 	if(empty($picture)){
-		echo '<input type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button" />';
+		echo '<button type="button" class="button button-secondary" value="Upload Profile Picture" id="upload-button"><span class="sunset-icon-button dashicons-before dashicons-format-image"> Upload Profile Picture</span></button>';
 		echo '<input type="hidden" id="profile-picture" value="" name="profile_picture" />';
 	} else {
-		echo '<input type="button" class="button button-secondary" value="Replace Profile Picture" id="upload-button" />';
-		echo '<input type="hidden" id="profile-picture" value="'.$picture.'" name="profile_picture" />
-		<input type="button" class="button button-secondary" value="Remove" id="remove-picture" />';
+		echo '<button type="button" class="button button-secondary" value="Replace Profile Picture" id="upload-button"><span class="sunset-icon-button dashicons-before dashicons-format-image"> Replace Profile Picture</span></button>';
+		echo '<input type="hidden" id="profile-picture" value="'.$picture.'" name="profile_picture" />';
+		echo ' <button type="button" class="button button-secondary" value="Remove" id="remove-picture"><span class="sunset-icon-button dashicons-before dashicons-no"> Remove</span></button>';
 	}
 }
 

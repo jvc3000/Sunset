@@ -20,6 +20,14 @@
 	-->
 
 	<?php wp_head(); ?>
+
+	<?php
+	$custom_css = esc_attr(get_option('css_form'));
+	if(!empty($custom_css)):
+		echo '<style>'.$custom_css.'</style>';
+	endif;
+	?>
+
 </head>
 
 <body <?php body_class(); ?>>
