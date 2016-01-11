@@ -52,10 +52,8 @@ $body-font : 'Raleway', 'Helvetica Neue', 'Helvetica', Arial, Verdana, sans-seri
 /***** Generic *****/
 body { font-family: $body-font; }
 
-.background-image {
-  background-size: cover;
-  background: no-repeat center center;
-}
+//.background-image { background-position: center center; background-size: cover; background-repeat: no-repeat; }
+.background-image { background: center center/cover no-repeat; }
 
 .table { display: table; width: 100%; height: 100%;
   .table-cell { display: table-cell; width: 100%; height: 100%; vertical-align: middle; }
@@ -66,3 +64,5 @@ body { font-family: $body-font; }
 
 .site-title { color: #fff; margin: 0; font-size: 80px; }
 .site-description { font-size: 14px; color: #fff; margin-top: 1em; }
+
+.nav-container{ position: absolute; bottom: 0; left: 0; right: 0; }

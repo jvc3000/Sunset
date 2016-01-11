@@ -47,7 +47,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="header-container background-image text-center" style="background-image: url(<?php header_image(); ?>)">
+			<header class="header-container background-image text-center" style="background-image: url(<?php header_image(); ?>)">
 				<div class="header-content table">
 					<div class="table-cell">
 						<h1 class="site-title sunset-icon">
@@ -58,8 +58,17 @@
 					</div>
 				</div>
 				<div class="nav-container">
+					<nav class="navbar navbar-default navbar-sunset">
+						<?php
+						wp_nav_menu(array(
+							'theme_location' => 'primary',
+							'container' => false,
+							'menu_class' => 'nav navbar-nav',
+						));
+						?>
+					</nav>
 				</div>
-			</div>
+			</header>
 		</div>
 	</div>
 </div>
