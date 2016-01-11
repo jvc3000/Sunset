@@ -8,9 +8,15 @@
 
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
+<!--suppress JSUnresolvedLibraryURL -->
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title><?php bloginfo('name'); wp_title(); ?></title>
+	<meta name="description" content="<?php bloginfo('description') ?>">
 
 	<!--
 	<link rel="profile" href="http://gmpg.org/xfn/11">
@@ -21,10 +27,17 @@
 
 	<?php wp_head(); ?>
 
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
 	<?php
 	$custom_css = esc_attr(get_option('css_form'));
-	if(!empty($custom_css)):
-		echo '<style>'.$custom_css.'</style>';
+	if (!empty($custom_css)):
+		echo '<style>' . $custom_css . '</style>';
 	endif;
 	?>
 
@@ -43,10 +56,10 @@
 						</h1>
 						<h2 class="site-description"><?php bloginfo('description'); ?></h2>
 					</div>
-				</div><!-- .header-content -->
+				</div>
 				<div class="nav-container">
-				</div><!-- .nav-container -->
-			</div><!-- .header-container -->
-		</div><!-- .col-xs-12 -->
-	</div><!-- .row -->
-</div><!-- .container-fluid -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

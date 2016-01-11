@@ -1,5 +1,17 @@
 <?php
 
+/*
+@package sunsettheme
+
+	================================
+	SUNSET FUNCTIONS (MAIN)
+	================================
+*/
+
+/* Template Includes */
+
+/** @noinspection PhpIncludeInspection */
+require get_template_directory() . '/inc/cleanup.php';
 /** @noinspection PhpIncludeInspection */
 require get_template_directory() . '/inc/function-admin.php';
 /** @noinspection PhpIncludeInspection */
