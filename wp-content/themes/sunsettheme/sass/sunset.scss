@@ -8,6 +8,23 @@
 $icon-font : 'sunset-icon';
 $body-font : 'Raleway', 'Helvetica Neue', 'Helvetica', Arial, Verdana, sans-serif;
 
+// ***** Mixin *****
+@mixin animate($attr,$time){
+  -webkit-transition: $attr $time ease;
+  -moz-transition: $attr $time ease;
+//  -ms-transition: $attr $time ease;
+  -o-transition: $attr $time ease;
+  transition: $attr $time ease;
+}
+
+@mixin transform($val){
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  -o-transform: $val;
+  transform: $val;
+}
+
 /***** Font Icon *****/
 @font-face {
   font-family: 'sunset-icon';
@@ -66,3 +83,44 @@ body { font-family: $body-font; }
 .site-description { font-size: 14px; color: #fff; margin-top: 1em; }
 
 .nav-container{ position: absolute; bottom: 0; left: 0; right: 0; }
+
+/***** Nav Bar *****/
+.navbar-sunset { text-align: center; border: none; border-radius: 0; min-height: initial; margin-bottom: 0; background: rgba( 255,255,255,0.1); border-top: 1px solid rgba( 255,255,255,0.1);
+  ul { float: none; }
+  li { float: none; display: inline-block;
+    &.active {
+      a { opacity: 1;
+        &:after { @include transform( translateY(0) ); opacity: 1; }
+      }
+    }
+    &.open {
+      a { opacity: 1; background-color: rgba(0,0,0,0.1)!important;
+        &:after { @include transform( translateY(10px) ); opacity: 0!important; }
+        &:hover,
+        &:focus,
+        &:visited { background-color: rgba(0,0,0,0.1)!important;
+          &:after { @include transform( translateY(10px) ); opacity: 0!important; }
+        }
+      }
+    }
+    a { text-transform: uppercase; color: #fff; font-size: 12px; opacity: 0.7; letter-spacing: 0.05em; background: none; @include animate( opacity, 320ms );
+      &:hover,
+      &:focus,
+      &:visited { background: none; opacity: 1;
+        &:after { @include transform( translateY(0) ); opacity: 1; }
+      }
+      &:after { content: ''; position: absolute; display: block; left: 15px; right: 15px; bottom: 14px; height: 2px; background: #fff; @include animate( all, 320ms ); opacity: 0; @include transform( translateY(10px) ); }
+    }
+    ul.dropdown-menu { border: 0; border-radius: 0; background: rgba(0,0,0,0.75);
+      li { display: block;
+        a {
+          &:hover,
+          &:focus,
+          &:visited { background: rgba(0,0,0,0.25)!important; color: #fff; }
+        }
+      }
+    }
+  }
+}
+
+

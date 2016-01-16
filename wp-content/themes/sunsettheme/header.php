@@ -58,12 +58,13 @@
 					</div>
 				</div>
 				<div class="nav-container">
-					<nav class="navbar navbar-default navbar-sunset">
+					<nav class="navbar navbar-sunset">
 						<?php
 						wp_nav_menu(array(
 							'theme_location' => 'primary',
 							'container' => false,
 							'menu_class' => 'nav navbar-nav',
+							'walker' => new Sunset_Walker_Nav_Primary()
 						));
 						?>
 					</nav>

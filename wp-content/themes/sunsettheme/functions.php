@@ -20,3 +20,5 @@ require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/theme-support.php';
 /** @noinspection PhpIncludeInspection */
 require get_template_directory() . '/inc/custom-post-type.php';
+/** @noinspection PhpIncludeInspection */
+require get_template_directory() . '/inc/walker.php';
