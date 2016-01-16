@@ -29,13 +29,13 @@ if(@$background == 1){
 
 add_theme_support('post-thumbnails');
 
-/* Active Nav Menu Option */
+/* Active Header Nav Menu Option */
 function sunset_register_nav_menu(){
 	register_nav_menu('primary','Header Navigation Menu');
 }
 add_action('after_setup_theme', 'sunset_register_nav_menu');
 
-/* Blog Loop Custom Functions */
+/* Blog Loop Custom Meta Print Function */
 function sunset_posted_meta(){
 	$posted_on = human_time_diff(get_the_time('U'),current_time('timestamp'));
 	$categories = get_the_category();
@@ -51,6 +51,7 @@ function sunset_posted_meta(){
 	endif;
 	return '<span class="posted-on">Posted <a href="' . esc_url(get_permalink()) . '">' . $posted_on . '</a> ago</span> / <span class="posted-in">' . $output . '</span>';
 }
+/* Blog Loop Custom Footer Tags and Links Print Function */
 function sunset_posted_footer(){
 	return 'tags list and comment links';
 }

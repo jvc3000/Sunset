@@ -60,12 +60,28 @@
 				<div class="nav-container">
 					<nav class="navbar navbar-sunset">
 						<?php
-						wp_nav_menu(array(
-							'theme_location' => 'primary',
-							'container' => false,
-							'menu_class' => 'nav navbar-nav',
-							'walker' => new Sunset_Walker_Nav_Primary()
-						));
+
+						$defaults = array(
+							'theme_location'  => 'primary',
+							'menu'            => '',
+							'container'       => '',
+							'container_class' => '',
+							'container_id'    => '',
+							'menu_class'      => 'nav navbar-nav',
+							'menu_id'         => '',
+							'echo'            => true,
+							'fallback_cb'     => 'wp_page_menu',
+							'before'          => '',
+							'after'           => '',
+							'link_before'     => '',
+							'link_after'      => '',
+							'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+							'depth'           => 0,
+							'walker'          => new Sunset_Walker_Nav_Primary()
+						);
+
+						wp_nav_menu( $defaults );
+
 						?>
 					</nav>
 				</div>

@@ -27,7 +27,7 @@ class Sunset_Walker_Nav_Primary extends Walker_Nav_menu {
 
 		/** @noinspection PhpUndefinedFieldInspection */
 		$classes[] = ($args->walker->has_children) ? 'dropdown' : '';
-		$classes[] = ($item->current || $item->current_item_anchestor) ? 'active' : '';
+		$classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
 		$classes[] = 'menu-item-' . $item->ID;
 		/** @noinspection PhpUndefinedFieldInspection */
 		if( $depth && $args->walker->has_children ){
